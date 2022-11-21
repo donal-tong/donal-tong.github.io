@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[MCDonald Blog]]></title>
+  <link href="http://donal-tong.github.io/atom.xml" rel="self"/>
+  <link href="http://donal-tong.github.io/"/>
+  <updated>2014-06-05T16:44:31+08:00</updated>
+  <id>http://donal-tong.github.io/</id>
+  <author>
+    <name><![CDATA[Donal]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Wechatserver]]></title>
+    <link href="http://donal-tong.github.io/blog/2014/06/05/wechatserver/"/>
+    <updated>2014-06-05T14:10:22+08:00</updated>
+    <id>http://donal-tong.github.io/blog/2014/06/05/wechatserver</id>
+    <content type="html"><![CDATA[<h2>服务器的配置</h2>
+
+<h3>服务器地址</h3>
+
+<p><a href="https://github.com/donal-tong/wechat4server">https://github.com/donal-tong/wechat4server</a></p>
+
+<p>包括源代码及数据库脚本放在dump文件夹里</p>
+
+<p>1、根据sql脚本创建需要的数据库hcapi，然后命令行执行脚本，这个不多说。</p>
+
+<p>2、用myeclipse import项目，（如果发现缺少jar，请自行到群共享下载jar），需要更改的文件只有一个 persistence.xml，其实就是数据库的配置文件，更改username及password
+<img src="http://donal-tong.github.io/images/QQ20140605-1.png"></p>
+
+<p>至此服务器端的源码配置完成</p>
+
+<h2>Openfire配置</h2>
+
+<h3>openfire地址</h3>
+
+<p><a href="http://www.igniterealtime.org/projects/openfire/">http://www.igniterealtime.org/projects/openfire/</a></p>
+
+<p>以Mac为例，openfire安装成功后会出现在系统偏好设置，openfire的配置需要已有数据库的配置，这里已mysql为例，并且是需要已创建了一个openfire的db，若对mysql安装及配置有问题可以参考 <a href="http://www.cnblogs.com/xiaodao/archive/2013/04/04/2999426.html">http://www.cnblogs.com/xiaodao/archive/2013/04/04/2999426.html</a></p>
+
+<p>配置openfire服务器</p>
+
+<p>1、设置语言，选中文
+<img src="http://donal-tong.github.io/images/QQ20140605-2.png"></p>
+
+<p>2、服务器设置，域填入 wechat.com 端口默认，需要选择blowfish（服务器需要），key填入4H709fjyRIPOVvK
+<img src="http://donal-tong.github.io/images/QQ20140605-3.png"></p>
+
+<p>3、数据库设置，默认标准
+<img src="http://donal-tong.github.io/images/QQ20140605-4.png"></p>
+
+<p>4、数据库连接，选择mysql，数据库url为jdbc:mysql://localhost:3306/openfire?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8，注意openfire以存在
+用户名密码都是自行输入
+<img src="http://donal-tong.github.io/images/QQ20140605-5.png"></p>
+
+<p>5、特性设置，默认初始
+<img src="http://donal-tong.github.io/images/QQ20140605-6.png"></p>
+
+<p>6、设置openfire服务器管理员的帐号和密码，默认是admin，可以选择跳过
+<img src="http://donal-tong.github.io/images/QQ20140605-7.png"></p>
+
+<p>至此openfire配置好
+<img src="http://donal-tong.github.io/images/QQ20140605-8.png"></p>
+
+<p>另外这里检查一下passwordKey有没有设置，如果没有可以在底部位置添加，然后重启openfire
+<img src="http://donal-tong.github.io/images/QQ20140605-9.png"></p>
+
+<h3>运行服务器及openfire测试</h3>
+
+<p>服务器运行需要tomcat配合，请自行安装tomcat
+<img src="http://donal-tong.github.io/images/QQ20140605-10.png"></p>
+
+<p>编译通过以后，在tomcat里会有wechat的一个文件夹
+<img src="http://donal-tong.github.io/images/QQ20140605-11.png"></p>
+
+<p>另外需要建立一个res的文件夹且放一个default.png的图片，其中res是存放上传的图片
+<img src="http://donal-tong.github.io/images/QQ20140605-12.png"></p>
+
+<p>最后就可以用客户端去测试了</p>
+
+<p>客户端介绍 <a href="http://donal-tong.github.io/blog/2014/03/01/xmpp4android1/">http://donal-tong.github.io/blog/2014/03/01/xmpp4android1/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ListView or GridView for ScrollView]]></title>
+    <link href="http://donal-tong.github.io/blog/2014/05/28/listview-for-scrollview/"/>
+    <updated>2014-05-28T14:03:39+08:00</updated>
+    <id>http://donal-tong.github.io/blog/2014/05/28/listview-for-scrollview</id>
+    <content type="html"><![CDATA[<p>ScrollView嵌套ListView或者是GridView的结构，Google公司不建议一起使用，但是看看下面这个设计（其中分类上面还有广告位，整个页面能够上下滑动）：</p>
+
+<p><img src="http://donal-tong.github.io/images/gridview4scrollview.png"></p>
+
+<p>如果用layout来做，这是需要写12个button，但是如果以后这些类别需要从api获取再显示的话，用layout的方法明显不够灵活，因此就会想到用Gridview来实现。</p>
+
+<p>但是由于Gridview或者Listview在ScrollView里面，高度都是显示不完整的，那么需要怎么解决?</p>
+
+<p>前面一篇文章提到可以单独计算ListView的高度，但是这个有点不好的地方就是ListView的item只能用LinearLayout，这个可以返回阅读。</p>
+
+<p>那么现在介绍另外一个方法：自定义可适应ScrollView的ListView或者Gridview,以Gridview为例</p>
+
+<pre><code>public class GridViewForScrollView extends GridView{
+
+    public GridViewForScrollView(Context context) {
+        super(context);
+    }
+
+    public GridViewForScrollView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public GridViewForScrollView(Context context, AttributeSet attrs,
+        int defStyle) {
+        super(context, attrs, defStyle);
+    }   
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE &gt;&gt; 2,
+            MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, expandSpec);
+    }
+}
+</code></pre>
+
+<p>其中重点就是在onMeasure方法</p>
+
+<pre><code>int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE &gt;&gt; 2,
+            MeasureSpec.AT_MOST);
+</code></pre>
+
+<p>接下来直接用GridViewForScrollView即可</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Picasso and Android-Universal-Image-Loader]]></title>
+    <link href="http://donal-tong.github.io/blog/2014/05/21/picasso-and-auil/"/>
+    <updated>2014-05-21T13:45:56+08:00</updated>
+    <id>http://donal-tong.github.io/blog/2014/05/21/picasso-and-auil</id>
+    <content type="html"><![CDATA[<h1>picasso</h1>
+
+<p>Picasso <a href="http://square.github.io/picasso/">http://square.github.io/picasso/</a>
+Square的开源项目之一</p>
+
+<p>最大特点就是你只需要一句代码：</p>
+
+<pre><code>Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+</code></pre>
+
+<p>缓存什么的设置基本可以忽略了</p>
+
+<p>另外的一些诸如裁剪图片：</p>
+
+<pre><code>Picasso.with(context)  .load(url)  .resize(50, 50)  .centerCrop()  .into(imageView)
+</code></pre>
+
+<p>同样Picasso也支持Resources, assets, files, content providers的加载</p>
+
+<pre><code>Picasso.with(context).load(R.drawable.landing_screen).into(imageView1);
+
+Picasso.with(context).load(new File(...)).into(imageView2);
+</code></pre>
+
+<h1>Android-Universal-Image-Loader</h1>
+
+<p>Android-Universal-Image-Loader <a href="https://github.com/nostra13/Android-Universal-Image-Loader">https://github.com/nostra13/Android-Universal-Image-Loader</a></p>
+
+<h2>特点</h2>
+
+<p>多线程加载图片</p>
+
+<p>尽可能多的配置选项（线程池，加载器，解析器，内存/磁盘缓存，显示参数等等）</p>
+
+<p>图片可以缓存在内存中，或者设备文件目录下，或者SD卡中</p>
+
+<p>可以添加图片加载监听器</p>
+
+<p>可以自定义显示每一张图片时都带不同参数</p>
+
+<p>支持Widget</p>
+
+<p>Android 2.0以上支持</p>
+
+<h2>使用</h2>
+
+<p>1、初始化imageloader，这个方法需要在application的create调用</p>
+
+<pre><code>public static void init(Context context) {
+    ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+    .threadPriority(Thread.NORM_PRIORITY - 2)
+    .denyCacheImageMultipleSizesInMemory()
+    .discCacheFileNameGenerator(new Md5FileNameGenerator())
+    .tasksProcessingOrder(QueueProcessingType.LIFO)
+    .writeDebugLogs() // Remove for release app
+    .build();
+    ImageLoader.getInstance().init(config);
+}
+</code></pre>
+
+<p>2.配置显示的options</p>
+
+<pre><code>DisplayImageOptions displayOption = new DisplayImageOptions.Builder()
+.bitmapConfig(Bitmap.Config.RGB_565)
+.showImageOnLoading(R.drawable.avatar_placeholder)
+.showImageForEmptyUri(R.drawable.avatar_placeholder)
+.showImageOnFail(R.drawable.avatar_placeholder)
+.cacheInMemory(true)
+.cacheOnDisc(true)
+.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) 
+.displayer(new BitmapDisplayer() {
+    @Override
+    public void display(Bitmap bitmap, ImageAware imageAware,
+        LoadedFrom loadedFrom) {
+        imageAware.setImageBitmap(bitmap);
+    }
+})
+.build();
+</code></pre>
+
+<p>3.加载到view</p>
+
+<pre><code>ImageLoader.getInstance().displayImage(model.avatar, cell.avatarImageView, displayOption);
+</code></pre>
+
+<h2>根据url获取已读的图片文件</h2>
+
+<pre><code>File file1 = DiscCacheUtil.findInCache(card.avatar, imageLoader.getDiscCache());
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android WebView上传文件]]></title>
+    <link href="http://donal-tong.github.io/blog/2014/05/16/android-webviewshang-chuan-wen-jian/"/>
+    <updated>2014-05-16T14:38:37+08:00</updated>
+    <id>http://donal-tong.github.io/blog/2014/05/16/android-webviewshang-chuan-wen-jian</id>
+    <content type="html"><![CDATA[<h2>需要的变量</h2>
+
+<pre><code>private ValueCallback&lt;Uri&gt; mUploadMessage;
+private final static int FILECHOOSER_RESULTCODE = 1;
+private final static int CAMERA_RESULTCODE = 2;
+private Uri outputFileUri;
+</code></pre>
+
+<h2>在WebChromeClient里添加</h2>
+
+<pre><code>public void openFileChooser( ValueCallback&lt;Uri&gt; uploadMsg, String acceptType ) {  
+    mUploadMessage = uploadMsg;  
+    QYWebView.this.openImageIntent();
+}   
+
+// For Android &lt; 3.0
+public void openFileChooser( ValueCallback&lt;Uri&gt; uploadMsg ) {
+    openFileChooser( uploadMsg, "" );
+}
+
+// For Android &gt; 4.1
+public void openFileChooser(ValueCallback&lt;Uri&gt; uploadMsg, String acceptType, String capture){
+    openFileChooser( uploadMsg, "" );
+}
+</code></pre>
+
+<h2>onActivityResult处理</h2>
+
+<pre><code>if(requestCode==FILECHOOSER_RESULTCODE)  {  
+    if (null == mUploadMessage) return;  
+    Uri result = intent == null || resultCode != RESULT_OK ? null: intent.getData();  
+    mUploadMessage.onReceiveValue(result);  
+    mUploadMessage = null;  
+}  
+if(requestCode==CAMERA_RESULTCODE) {  
+    if (null == mUploadMessage) return;  
+    outputFileUri = outputFileUri == null || resultCode != RESULT_OK ? null: outputFileUri;  
+    mUploadMessage.onReceiveValue(outputFileUri);  
+    mUploadMessage = null;  
+}
+</code></pre>
+
+<h2>体验</h2>
+
+<p>在我看来这样的上传方式用户体验相当不友好，特别是在上传图片时，如果图片比较大并且web前端没有进行压缩的话，那么上传速度达到龟速甚至上传失败，可想而之用户对此的烦躁心情，对你的产品大打折扣了。</p>
+
+<p>我的建议还是上传文件模块还是使用native，本地压缩后上传。</p>
+
+<p>ps：有草稿箱的设计更好！！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ListView嵌套ListView遇到的问题]]></title>
+    <link href="http://donal-tong.github.io/blog/2014/05/16/listview/"/>
+    <updated>2014-05-16T13:51:19+08:00</updated>
+    <id>http://donal-tong.github.io/blog/2014/05/16/listview</id>
+    <content type="html"><![CDATA[<p>Listview嵌套会造成的问题主要是子listview的高度错误导致内容不能正常显示完，解决这个问题，我个人第一个想法就是重新计算子listview的高度，代码如下：</p>
+
+<pre><code>private void setListViewHeightBasedOnChildren(ListView listView) { 
+    if(listView == null) return;
+
+    ListAdapter listAdapter = listView.getAdapter(); 
+    if (listAdapter == null) { 
+        return; 
+    } 
+
+    int totalHeight = 0; 
+    for (int i = 0; i &lt; listAdapter.getCount(); i++) { 
+        View listItem = listAdapter.getView(i, null, listView); 
+        listItem.measure(0, 0); 
+        totalHeight += listItem.getMeasuredHeight(); 
+    } 
+
+    ViewGroup.LayoutParams params = listView.getLayoutParams(); 
+    params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1)); 
+    listView.setLayoutParams(params); 
+}
+</code></pre>
+
+<h3>父listview的adapter中getview方法调用</h3>
+
+<p>RelationAdapter relationAdapter = new RelationAdapter(context, model.relations);
+cell.xlistView.setAdapter(relationAdapter);
+setListViewHeightBasedOnChildren(cell.xlistView);</p>
+
+<h3>注意事项：</h3>
+
+<p>Adapter中getView方法返回的View的必须由LinearLayout组成，因为只有LinearLayout才有measure()方法，如果使用其他的布局如RelativeLayout，在调用listItem.measure(0, 0);时就会抛异常。</p>
+
+<h3>效果图：</h3>
+
+<p><img src="https://app.yinxiang.com/shard/s4/sh/a99834cb-5b8a-4d78-bb56-384020c089b2/8eb41bb7b882fa3dfb05609e291fe8bc/res/ba9b7c16-b4b3-417a-ba5a-395502162b82.jpg?resizeSmall&width=832" width=600></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[xmpp4Android 第一期]]></title>
+    <link href="http://donal-tong.github.io/blog/2014/03/01/xmpp4android1/"/>
+    <updated>2014-03-01T18:43:25+08:00</updated>
+    <id>http://donal-tong.github.io/blog/2014/03/01/xmpp4android1</id>
+    <content type="html"><![CDATA[<h3>仿微信基本功能，基于XMPP服务器的即时通信以及交友客户端。</h3>
+
+<p>  代码的功能如下</p>
+
+<p>  1.用户登录,注册</p>
+
+<p>  2.登陆并连接XMPP服务器</p>
+
+<p>  3.查找最新注册用户:(下拉刷新 上拉翻页)</p>
+
+<p>  4.点击某个用户即可对他发送消息,带聊天记录（下拉查看消息的loading没做）</p>
+
+<p>  5.首页显示收到的和发送的所有消息,按时间排序</p>
+
+<h3>源代码</h3>
+
+<p><a href="https://github.com/donal-tong/wechat">项目代码</a></p>
+
+<p><a href="https://github.com/donal-tong/wechatLibrary">library代码</a></p>
+
+<h3>QQ群 293158074</h3>
+]]></content>
+  </entry>
+  
+</feed>

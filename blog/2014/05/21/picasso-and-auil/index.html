@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Picasso and Android-Universal-Image-Loader - MCDonald Blog</title>
+  <meta name="author" content="Donal">
+
+  
+  <meta name="description" content="picasso Picasso http://square.github.io/picasso/
+Square的开源项目之一 最大特点就是你只需要一句代码： Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://donal-tong.github.io/blog/2014/05/21/picasso-and-auil">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="MCDonald Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!-- <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> -->
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48545653-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">MCDonald Blog</a></h1>
+  
+    <h2>想写点东西</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:donal-tong.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Picasso and Android-Universal-Image-Loader</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-21T13:45:56+08:00" pubdate data-updated="true">May 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>picasso</h1>
+
+<p>Picasso <a href="http://square.github.io/picasso/">http://square.github.io/picasso/</a>
+Square的开源项目之一</p>
+
+<p>最大特点就是你只需要一句代码：</p>
+
+<pre><code>Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+</code></pre>
+
+<p>缓存什么的设置基本可以忽略了</p>
+
+<p>另外的一些诸如裁剪图片：</p>
+
+<pre><code>Picasso.with(context)  .load(url)  .resize(50, 50)  .centerCrop()  .into(imageView)
+</code></pre>
+
+<p>同样Picasso也支持Resources, assets, files, content providers的加载</p>
+
+<pre><code>Picasso.with(context).load(R.drawable.landing_screen).into(imageView1);
+
+Picasso.with(context).load(new File(...)).into(imageView2);
+</code></pre>
+
+<h1>Android-Universal-Image-Loader</h1>
+
+<p>Android-Universal-Image-Loader <a href="https://github.com/nostra13/Android-Universal-Image-Loader">https://github.com/nostra13/Android-Universal-Image-Loader</a></p>
+
+<h2>特点</h2>
+
+<p>多线程加载图片</p>
+
+<p>尽可能多的配置选项（线程池，加载器，解析器，内存/磁盘缓存，显示参数等等）</p>
+
+<p>图片可以缓存在内存中，或者设备文件目录下，或者SD卡中</p>
+
+<p>可以添加图片加载监听器</p>
+
+<p>可以自定义显示每一张图片时都带不同参数</p>
+
+<p>支持Widget</p>
+
+<p>Android 2.0以上支持</p>
+
+<h2>使用</h2>
+
+<p>1、初始化imageloader，这个方法需要在application的create调用</p>
+
+<pre><code>public static void init(Context context) {
+    ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+    .threadPriority(Thread.NORM_PRIORITY - 2)
+    .denyCacheImageMultipleSizesInMemory()
+    .discCacheFileNameGenerator(new Md5FileNameGenerator())
+    .tasksProcessingOrder(QueueProcessingType.LIFO)
+    .writeDebugLogs() // Remove for release app
+    .build();
+    ImageLoader.getInstance().init(config);
+}
+</code></pre>
+
+<p>2.配置显示的options</p>
+
+<pre><code>DisplayImageOptions displayOption = new DisplayImageOptions.Builder()
+.bitmapConfig(Bitmap.Config.RGB_565)
+.showImageOnLoading(R.drawable.avatar_placeholder)
+.showImageForEmptyUri(R.drawable.avatar_placeholder)
+.showImageOnFail(R.drawable.avatar_placeholder)
+.cacheInMemory(true)
+.cacheOnDisc(true)
+.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) 
+.displayer(new BitmapDisplayer() {
+    @Override
+    public void display(Bitmap bitmap, ImageAware imageAware,
+        LoadedFrom loadedFrom) {
+        imageAware.setImageBitmap(bitmap);
+    }
+})
+.build();
+</code></pre>
+
+<p>3.加载到view</p>
+
+<pre><code>ImageLoader.getInstance().displayImage(model.avatar, cell.avatarImageView, displayOption);
+</code></pre>
+
+<h2>根据url获取已读的图片文件</h2>
+
+<pre><code>File file1 = DiscCacheUtil.findInCache(card.avatar, imageLoader.getDiscCache());
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Donal</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-21T13:45:56+08:00" pubdate data-updated="true">May 21<span>st</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>Android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+
+  
+     <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+<!-- UY END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/16/android-webviewshang-chuan-wen-jian/" title="Previous Post: Android WebView上传文件">&laquo; Android WebView上传文件</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/28/listview-for-scrollview/" title="Next Post: ListView or GridView for ScrollView">ListView or GridView for ScrollView &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/06/05/wechatserver/">Wechatserver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/28/listview-for-scrollview/">ListView or GridView for ScrollView</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/21/picasso-and-auil/">Picasso and Android-Universal-Image-Loader</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/16/android-webviewshang-chuan-wen-jian/">Android WebView上传文件</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/16/listview/">ListView嵌套ListView遇到的问题</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Donal -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd90bf0dc23fddb54900a95a9f3065249' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+</body>
+</html>
